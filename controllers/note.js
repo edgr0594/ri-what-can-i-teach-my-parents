@@ -12,6 +12,7 @@ var Note = require('../models/Note');
 exports.postNewNoteForm = function(req, res, next) {
   req.assert('noteText', 'Text must be between 1 and 140 characters').len(1, 140);
   req.assert('twitterHandle', 'Twitter handle must be between 1 and 25 characters').len(1, 25);
+  req.assert('grade', 'Grade must be 1 or 2 digits').len(1,2).isInt();
   var errors = req.validationErrors();
   console.log(req.body);
   if (errors) {
@@ -19,7 +20,8 @@ exports.postNewNoteForm = function(req, res, next) {
   }
   var note = new Note({
     text: req.body.noteText,
-    twitterHandle: req.body.twitterHandle
+    twitterHandle: req.body.twitterHandle,
+    grade: req.body.grade,
   }).save(function(err, newNote) {
     return res.send(newNote);
   });

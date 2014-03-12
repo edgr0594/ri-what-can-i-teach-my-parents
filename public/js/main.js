@@ -12,7 +12,7 @@ var prLover = {
     // Template the new note.
     var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
     if (noteData.twitterHandle) {
-      newNote = newNote + "<div class='note-twitter-handle'>" + noteData.twitterHandle + "</div>";
+      newNote = newNote + "<div class='note-twitter-handle'>" + noteData.twitterHandle + "<br/>(Grade: " + noteData.grade + ")</div>";
     }
     var tweetLink = {
       url: 'http://bit.ly/ilovepr',
@@ -107,6 +107,7 @@ var prLover = {
     // @TODO -- rework this so that validation is still done properly.
     var noteText = $('#new-note-form #noteText').val();
     var twitterHandle = $('#new-note-form #twitterHandle').val();
+    var grade = $('#new-note-form #grade').val();
     var _csrf = $("#new-note-form [name='_csrf']").val();
     return $.ajax({
       type: "POST",
@@ -114,6 +115,7 @@ var prLover = {
       data: {
         noteText: noteText,
         twitterHandle: twitterHandle,
+        grade: grade,
         _csrf: _csrf
       }
     });
@@ -163,6 +165,7 @@ var prLover = {
           // Clear out the fields.
           $('#new-note-form #noteText').val('');
           $('#new-note-form #twitterHandle').val('');
+          $('#new-note-form #grade').val('');
           prLover.prependNewNote(response);
         }
         else {
