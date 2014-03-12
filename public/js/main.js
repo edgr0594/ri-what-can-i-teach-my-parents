@@ -12,15 +12,15 @@ var prLover = {
     // Template the new note.
     var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
     if (noteData.twitterHandle) {
-      newNote = newNote + "<div class='note-twitter-handle'><a href='http://twitter.com/" + noteData.twitterHandle + "' target='_blank'>@" + noteData.twitterHandle + "</a></div>";
+      newNote = newNote + "<div class='note-twitter-handle'>" + noteData.twitterHandle + "</div>";
     }
     var tweetLink = {
       url: 'http://bit.ly/ilovepr',
-      text: 'Yo Me Quedo en Puerto Rico porque ' + noteData.text,
-      hashtags: 'ilovepr'
+      text: 'What I can teach my parents... ' + noteData.text,
+      hashtags: 'whizkidsRI'
     }
     var tweetUrl = 'https://twitter.com/intent/tweet?' + $.param(tweetLink, true);
-    newNote = newNote + '<div class="tweet-link pull-right"><a href="' + tweetUrl + '"><img src="img/bird_gray_32.png"/></a></div>';
+    newNote = newNote + '<div class="tweet-link pull-right"><a href="' + tweetUrl + '"><img src="img/kid.png"/></a></div>';
     newNote = newNote + "</li>";
 
     return newNote;
