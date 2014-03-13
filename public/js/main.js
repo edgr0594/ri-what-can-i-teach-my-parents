@@ -12,7 +12,7 @@ var prLover = {
     // Template the new note.
     var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
     if (noteData.twitterHandle) {
-      newNote = newNote + "<div class='note-twitter-handle'>" + noteData.twitterHandle + "<br/>(Grade: " + noteData.grade + ")</div>";
+      newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "<br/>" + noteData.grade + " grader " + "</div>";
     }
     var tweetLink = {
       url: 'http://bit.ly/ilovepr',
@@ -20,7 +20,7 @@ var prLover = {
       hashtags: 'whizkidsRI'
     }
     var tweetUrl = 'https://twitter.com/intent/tweet?' + $.param(tweetLink, true);
-    newNote = newNote + '<div class="tweet-link pull-right"><a href="' + tweetUrl + '"><img src="img/kid.png"/></a></div>';
+    // newNote = newNote + '<div class="tweet-link pull-right"><a href="' + tweetUrl + '"><img src="img/kid.png"/></a></div>';
     newNote = newNote + "</li>";
 
     return newNote;
