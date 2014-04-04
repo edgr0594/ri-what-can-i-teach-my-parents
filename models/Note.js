@@ -7,6 +7,7 @@ var noteSchema = new mongoose.Schema({
   twitterHandle: { type: String, unique: false },
   updated: { type: Date, unique: false },
   grade: {type: Number},
+  votes: { type: Number, default: 0, unique: false }
 });
 
 noteSchema.pre('save', function(next) {
