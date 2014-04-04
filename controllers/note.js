@@ -58,5 +58,6 @@ exports.getNotes = function(req, res) {
 exports.updateNote = function(req, res) {
   console.log('updateNote');
   console.log(req.params);
+  console.log(req.body);
 };
 
