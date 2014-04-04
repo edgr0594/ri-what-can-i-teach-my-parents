@@ -8,24 +8,40 @@ var prLover = {
   noteIncrementLoadLimit: 27,
   flashFinishedEvents: 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
 
-  templateNote: function(noteData) {
-    // Template the new note.
-    var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
-    if (noteData.twitterHandle) {
-      newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "</div>";
-    }
-    if (noteData.grade) {
-       newNote =  newNote + "<br/><div class='grade-level'>" + noteData.grade + " grader </div>";
-    }
-    newNote = newNote + "<div class='note-vote'><button type='button' class='btn btn-default'><i class='fa fa-thumbs-o-up'></i></button></div>"
-
+  templateTweetLink: function(noteData) {
     var tweetLink = {
       url: 'http://bit.ly/ilovepr',
       text: 'What I can teach my parents... ' + noteData.text,
       hashtags: 'whizkidsRI'
     }
     var tweetUrl = 'https://twitter.com/intent/tweet?' + $.param(tweetLink, true);
-    // newNote = newNote + '<div class="tweet-link pull-right"><a href="' + tweetUrl + '"><img src="img/kid.png"/></a></div>';
+    return tweetUrl;
+  },
+
+  templateFBLink: function(noteData) {
+    //https://www.facebook.com/sharer/sharer.php?app_id=113869198637480&sdk=joey&u=http://ilovepuertorico.org&display=popup
+    var fbLink = {
+      app_id: '113869198637480',
+      sdk: 'joey',
+      u: 'http://www.ilovepuertorico.org',
+      display: 'popup'
+    }
+
+    var fbUrl = 'https://www.facebook.com/sharer/sharer.php?' + $.param(fbLink, true);
+
+    return fbUrl;
+  },
+
+  templateNote: function(noteData) {
+      // Template the new note.
+      var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
+      if (noteData.twitterHandle) {
+        newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "</div>";
+      }
+      if (noteData.grade) {
+         newNote =  newNote + "<br/><div class='grade-level'>" + noteData.grade + " grader </div>";
+      }
+      newNote = newNote + "<div class='note-vote'><button type='button' class='btn btn-default'><i class='fa fa-thumbs-o-up'></i></button></div>"
     newNote = newNote + "</li>";
 
     return newNote;
@@ -80,6 +96,11 @@ var prLover = {
     });
   },
 
+  voteOnNote: function(element) {
+    console.log(element);
+    console.log($(element).data('noteid'));
+  },
+
   insertNewNotes: function(newNoteData) {
     // First Time Call.
     if (!newNoteData.requestParams.skip || newNoteData.requestParams.skip < 1) {
@@ -106,6 +127,9 @@ var prLover = {
     $(this.container).isotope('insert', $(notesToAdd));
     var updatedNoteCount = $(this.container).data('loadedNotes') + this.noteIncrementLoadLimit;
     $(this.container).data('loadedNotes', updatedNoteCount);
+    $('.note-vote button').click(function(e) {
+      prLover.voteOnNote(this);
+    });
   },
 
   createNewNote: function() {
@@ -172,6 +196,12 @@ var prLover = {
           $('#new-note-form #twitterHandle').val('');
           $('#new-note-form #grade').val('');
           prLover.prependNewNote(response);
+          var tweetUrl = self.templateTweetLink(response);
+          var fbUrl = self.templateFBLink(response);
+          $('.variable-modal-content').html(
+            '<a class="btn btn-large" href="' + tweetUrl + '">Twitter</a><a target="_blank" class="btn btn-large" href="' + fbUrl + '">Facebook</a>'
+          );
+          $('#sharer-modal').modal();
         }
         else {
           for (var i = 0; i < response.errors.length; i ++) {

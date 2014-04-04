@@ -10,19 +10,11 @@ html(lang='es')
     != css('styles')
     script(src='//platform.twitter.com/widgets.js')
     script.
-      /*window.twttr = (function (d,s,id) {
-        var t, js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-        js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-        return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-       }(document, "script", "twitter-wjs"));*/
     != js('application')
-    // TODO -- figure out how stuff gets added to JADE like this
   body
     #wrap
       include partials/navigation
       .container
-        //include partials/new_note
         include partials/flash
         block content
     include partials/footer
