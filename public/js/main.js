@@ -17,7 +17,7 @@ var prLover = {
     if (noteData.grade) {
        newNote =  newNote + "<br/><div class='grade-level'>" + noteData.grade + " grader </div>";
     }
-    newNote = newNote + "<div class='note-thumbs-up'><button type='button' class='btn btn-default'><i class='fa fa-thumbs-o-up'></i></button></div>"
+    newNote = newNote + "<div class='note-vote'><button type='button' class='btn btn-default'><i class='fa fa-thumbs-o-up'></i></button></div>"
 
     var tweetLink = {
       url: 'http://bit.ly/ilovepr',
