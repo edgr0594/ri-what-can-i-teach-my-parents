@@ -51,3 +51,13 @@ exports.getNotes = function(req, res) {
   });
 };
 
+/**
+ * PUT /notes/:note_id
+ * UpdateNote
+ */
+
+ exports.updateNote = function(req, res) {
+   console.log('updateNote');
+   console.log(req.params);
+ }; 
+
