@@ -34,14 +34,18 @@ var prLover = {
 
   templateNote: function(noteData) {
       // Template the new note.
-      var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
+      var newNote = "<li class='note col-md-3'><div class='note-text note-'" + noteData._id + "'>" + noteData.text + "</div>";
       if (noteData.twitterHandle) {
         newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "</div>";
       }
       if (noteData.grade) {
          newNote =  newNote + "<br/><div class='grade-level'>" + noteData.grade + " grader </div>";
       }
-      newNote = newNote + "<div class='note-vote'><button type='button' data-noteid='" + noteData._id + "' class='btn btn-default'><i class='fa fa-thumbs-o-up'></i></button></div>"
+      var voteCount = noteData.votes;
+      if (voteCount == 0) {
+        voteCount = '';
+      }
+      newNote = newNote + '<div class="note-vote pull-left"><button type="button" data-noteid="' + noteData._id + '"  class="btn-default"><span class="vote-count">' + voteCount + '</span> <i class="fa fa-thumbs-o-up"></i></button></div>';
     newNote = newNote + "</li>";
 
     return newNote;
@@ -101,13 +105,16 @@ var prLover = {
     var note = $(element).data('noteid');
     var _csrf = $("#new-note-form [name='_csrf']").val();
     console.log(note);
-    return $.ajax({
+    $.ajax({
       type: "PUT",
       url: 'notes/' + $(element).data('noteid'),
       data: {
         voteCount: '+1',
         _csrf: _csrf
-      }
+      },
+      success: function(data) {
+        $(element).find('.vote-count').text(data.votes);
+      },
     });
 
   },
