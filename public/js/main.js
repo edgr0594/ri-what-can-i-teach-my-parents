@@ -12,7 +12,10 @@ var prLover = {
     // Template the new note.
     var newNote = "<li class='note col-md-3'><div class='note-text'>" + noteData.text + "</div>";
     if (noteData.twitterHandle) {
-      newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "<br/>" + noteData.grade + " grader " + "</div>";
+      newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "</div>";
+    }
+    if (noteData.grade) {
+       newNote =  newNote + "<br/><div class='grade-level'>" + noteData.grade + " grader </div>";
     }
     var tweetLink = {
       url: 'http://bit.ly/ilovepr',
