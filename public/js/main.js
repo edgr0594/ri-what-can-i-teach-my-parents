@@ -45,7 +45,7 @@ var prLover = {
       if (voteCount == 0) {
         voteCount = '';
       }
-      newNote = newNote + '<div class="note-vote pull-left"><button type="button" data-noteid="' + noteData._id + '"  class="btn-default"><span class="vote-count">' + voteCount + '</span> <i class="fa fa-thumbs-o-up"></i></button></div>';
+      newNote = newNote + '<div class="note-vote"><button type="button" data-noteid="' + noteData._id + '"  class="btn-default"><i class="fa fa-heart"></i><span class="vote-count"> ' + voteCount + '</span> </button></div>';
     newNote = newNote + "</li>";
 
     return newNote;
