@@ -36,16 +36,16 @@ var prLover = {
       // Template the new note.
       var newNote = "<li class='note col-md-3'><div class='note-text note-'" + noteData._id + "'>" + noteData.text + "</div>";
       if (noteData.twitterHandle) {
-        newNote = newNote + "<div class='note-twitter-handle'><img src='img/kid.png'/>" + noteData.twitterHandle + "</div>";
+        newNote = newNote + "<div class='note-twitter-handle pull-right'><img src='img/kid.png'/>" + noteData.twitterHandle + "</div>";
       }
       if (noteData.grade) {
-         newNote =  newNote + "<br/><div class='grade-level'>" + noteData.grade + " grader </div>";
+         newNote =  newNote + "<br/><div class='grade-level'>Grade " + noteData.grade + "</div>";
       }
       var voteCount = noteData.votes;
       if (voteCount == 0) {
         voteCount = '';
       }
-      newNote = newNote + '<div class="note-vote"><button type="button" data-noteid="' + noteData._id + '"  class="btn-default"><i class="fa fa-heart"></i><span class="vote-count"> ' + voteCount + '</span> </button></div>';
+      newNote = newNote + "<div class='note-footer'><div class='note-vote'><button type='button' data-noteid='" + noteData._id + "'  class='btn-default'><i class='fa fa-heart'></i><span class='vote-count'> " + voteCount + "</span> </button></div></div>";
     newNote = newNote + "</li>";
 
     return newNote;
